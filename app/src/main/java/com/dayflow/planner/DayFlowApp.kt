@@ -1,6 +1,7 @@
 package com.dayflow.planner
 
 import android.app.Application
+import android.content.Context
 import androidx.work.Configuration
 
 /**
@@ -21,11 +22,13 @@ class DayFlowApp : Application(), Configuration.Provider {
 
     override val workManagerConfiguration: Configuration
         get() = Configuration.Builder()
-            .setMinimumLoggingLevel(if (BuildConfig_DEBUG) android.util.Log.INFO else android.util.Log.ERROR)
+            .setMinimumLoggingLevel(if (DEBUG) android.util.Log.INFO else android.util.Log.ERROR)
             .build()
 
-    private companion object {
-        /** buildConfig generation is disabled; keep a tiny local flag instead. */
-        const val BuildConfig_DEBUG = false
+    companion object {
+        fun from(context: Context): DayFlowApp = context.applicationContext as DayFlowApp
+
+        /** buildConfig generation is disabled for this build; keep a local flag. */
+        private const val DEBUG = false
     }
 }

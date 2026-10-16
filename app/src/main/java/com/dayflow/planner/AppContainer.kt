@@ -1,6 +1,7 @@
 package com.dayflow.planner
 
 import android.content.Context
+import com.dayflow.planner.data.BackupManager
 import com.dayflow.planner.data.DayFlowDatabase
 import com.dayflow.planner.data.Repository
 import com.dayflow.planner.settings.SettingsStore
@@ -11,4 +12,5 @@ class AppContainer(context: Context) {
     val db: DayFlowDatabase = DayFlowDatabase.get(appContext)
     val repository: Repository = Repository(db)
     val settings: SettingsStore = SettingsStore(appContext)
+    val backup: BackupManager = BackupManager(appContext, repository, settings)
 }
